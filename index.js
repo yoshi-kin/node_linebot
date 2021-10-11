@@ -62,14 +62,14 @@ app.post("/webhook", function(req, res) {
         // Send data
         request.write(dataString)
         request.end()
-    }else if (req.body.events[0].message.text === "Thank you") {
+    }else if (req.body.events[0].message.text === "Good") {
         // Message data, must be stringified
         const dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,
             messages: [
                 {
                     "type": "text",
-                    "text": "No thank you"
+                    "text": "Have a nice day"
                 }
             ]
         })
