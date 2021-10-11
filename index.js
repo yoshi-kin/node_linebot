@@ -28,7 +28,7 @@ app.post("/webhook", function(req, res) {
             messages: [
             {
                 "type": "text",
-                "text": "Hello, user"
+                "text": "Hello"
             },
             {
                 "type": "text",
