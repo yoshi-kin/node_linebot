@@ -21,7 +21,7 @@ app.listen(PORT, () => {
 app.post("/webhook", function(req, res) {
     res.send("HTTP POST request sent to the webhook URL!")
     // If the user sends a message to your bot, send a reply message
-    if (req.body.events[0].messgae.text === "hello") {
+    if (req.body.events[0].message.text === "hello") {
         // Message data, must be stringified
         const dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,
