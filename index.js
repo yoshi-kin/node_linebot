@@ -26,14 +26,14 @@ app.post("/webhook", function(req, res) {
         const dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,
             messages: [
-            {
-                "type": "text",
-                "text": "Hello"
-            },
-            {
-                "type": "text",
-                "text": "May I help you?"
-            }
+                {
+                    "type": "text",
+                    "text": "How are you?"
+                },
+                {
+                    "type": "text",
+                    "text": "Are you fine?"
+                }
             ]
         })
     
