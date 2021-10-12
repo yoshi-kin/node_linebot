@@ -211,5 +211,87 @@ app.post("/webhook", function(req, res) {
         // Send data
         request.write(dataString)
         request.end()
+    }else if (req.body.events[0].message.text === "Image map"){
+        const dataString = JSON.stringify({
+            replyToken: req.body.events[0].replyToken,
+            messages: [
+                {
+                    "type": "imagemap",
+                    "baseUrl": "https://example.com/bot/images/rm001",
+                    "altText": "This is an imagemap",
+                    "baseSize": {
+                        "width": 1040,
+                        "height": 1040
+                    },
+                    "video": {
+                        "originalContentUrl": "https://example.com/video.mp4",
+                        "previewImageUrl": "https://example.com/video_preview.jpg",
+                        "area": {
+                            "x": 0,
+                            "y": 0,
+                            "width": 1040,
+                            "height": 585
+                        },
+                        "externalLink": {
+                            "linkUri": "https://example.com/see_more.html",
+                            "label": "See More"
+                        }
+                    },
+                    "actions": [
+                        {
+                            "type": "uri",
+                            "linkUri": "https://example.com/",
+                            "area": {
+                                "x": 0,
+                                "y": 586,
+                                "width": 520,
+                                "height": 454
+                            }
+                        },
+                        {
+                            "type": "message",
+                            "text": "Hello",
+                            "area": {
+                                "x": 520,
+                                "y": 586,
+                                "width": 520,
+                                "height": 454
+                            }
+                        }
+                    ]
+                  }
+            ]
+        })
+    
+        // Request header
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + TOKEN
+        }
+    
+        // Options to pass into the request
+        const webhookOptions = {
+            "hostname": "api.line.me",
+            "path": "/v2/bot/message/reply",
+            "method": "POST",
+            "headers": headers,
+            "body": dataString
+        }
+    
+        // Define request
+        const request = https.request(webhookOptions, (res) => {
+            res.on("data", (d) => {
+                process.stdout.write(d)
+            })
+        })
+    
+        // Handle error
+        request.on("error", (err) => {
+            console.error(err)
+        })
+    
+        // Send data
+        request.write(dataString)
+        request.end()
     }
 })
